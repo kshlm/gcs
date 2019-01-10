@@ -64,8 +64,16 @@ spec:
             - name: gluster-cgroup
               mountPath: "/sys/fs/cgroup"
               readOnly: true
+            - name: gluster-run
+              mountPath: "/run"
             - name: gluster-lvm
               mountPath: "/run/lvm"
+            - name: gluster-lvm-lvmetad
+              mountPath: "/run/lvm/lvmetad.socket"
+            - name: gluster-udev
+              mountPath: "/run/udev"
+            - name: gluster-udev-control
+              mountPath: "/run/udev/control"
             - name: gluster-kmods
               mountPath: "/usr/lib/modules"
               readOnly: true
@@ -80,9 +88,20 @@ spec:
         - name: gluster-cgroup
           hostPath:
             path: "/sys/fs/cgroup"
+        - name: gluster-run
+          emptyDir: {}
         - name: gluster-lvm
           hostPath:
             path: "/run/lvm"
+        - name: gluster-lvm-lvmetad
+          hostPath:
+            path: "/run/lvm/lvmetad.socket"
+        - name: gluster-udev
+          hostPath:
+            path: "/run/udev"
+        - name: gluster-udev-control
+          hostPath:
+            path: "/run/udev/control"
         - name: gluster-kmods
           hostPath:
             path: "/usr/lib/modules"
