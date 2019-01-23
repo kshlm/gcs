@@ -47,8 +47,8 @@ Vagrant.configure("2") do |config|
           ansible.become = true
           ansible.limit = "all"
           ansible.groups = {
-            "etcd" => ["kube[1:3]"],
-            "kube-master" => ["kube[1:2]"],
+            "etcd" => ["kube1"],
+            "kube-master" => ["kube1"],
             "kube-node" => ["kube[1:3]"],
             "k8s-cluster:children" => ["kube-master", "kube-node"],
             "gcs-node" => ["kube[1:3]"]
