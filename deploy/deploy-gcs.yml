@@ -7,16 +7,6 @@
     kubectl: /usr/local/bin/kubectl
 
   pre_tasks:
-    - name: GCS Pre | Cluster ID
-      block:
-        - name: GCS Pre | Cluster ID | Generate a UUID
-          command: uuidgen
-          register: uuidgen_result
-
-        - name: GCS Pre | Cluster ID | Set gcs_gd2_clusterid fact
-          set_fact:
-            gcs_gd2_clusterid: "{{ uuidgen_result.stdout }}"
-
     - name: GCS Pre | Manifests directory
       block:
         - name: GCS Pre | Manifests directory | Create a temporary directory
@@ -70,6 +60,22 @@
       kube:
         kubectl: "{{ kubectl }}"
         file: "{{ manifests_dir }}/gcs-namespace.yml"
+
+    - name: GCS | Cluster ID
+      block:
+        - name: GCS Pre | Cluster ID | Check if configmap is present
+          command: "{{ kubectl }} -n{{ gcs_namespace }} get configmap gcsclusterid"
+          ignore_errors: true
+          register: gcsconfig
+
+        - name: GCS Pre | Cluster ID | Generate a UUID
+          command: uuidgen
+          register: uuidgen_result
+          when: gcsconfig is failed
+
+        - name: GCS Pre | Cluster ID | Create gcsclusterid configmap
+          command: "{{ kubectl }} -n{{ gcs_namespace }} create configmap gcsclusterid --from-literal=id={{ uuidgen_result.stdout }}"
+          when: gcsconfig is failed
 
     - name: GCS | ETCD Operator
       block:

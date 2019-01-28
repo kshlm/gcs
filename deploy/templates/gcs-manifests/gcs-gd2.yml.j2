@@ -45,7 +45,10 @@ spec:
             - name: GD2_ETCDENDPOINTS
               value: "http://etcd-client.{{ gcs_namespace }}:2379"
             - name: GD2_CLUSTER_ID
-              value: "{{ gcs_gd2_clusterid }}"
+              valueFrom:
+                configMapKeyRef:
+                  name: gcsclusterid
+                  key: id
             - name: GD2_CLIENTADDRESS
               value: "gluster-{{ kube_hostname }}-0.glusterd2.{{ gcs_namespace }}:24007"
             - name: GD2_ENDPOINTS
