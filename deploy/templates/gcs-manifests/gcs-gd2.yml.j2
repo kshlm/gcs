@@ -34,6 +34,7 @@ spec:
       containers:
         - name: glusterd2
           image: docker.io/gluster/glusterd2-nightly
+          imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
               path: /ping

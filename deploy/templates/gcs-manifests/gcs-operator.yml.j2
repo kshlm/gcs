@@ -78,12 +78,12 @@ spec:
       containers:
         - name: anthill
           image: quay.io/gluster/anthill:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 60000
               name: metrics
           command:
             - anthill
-          imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
               valueFrom:

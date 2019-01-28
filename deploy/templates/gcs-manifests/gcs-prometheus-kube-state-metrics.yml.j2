@@ -110,6 +110,7 @@ spec:
         - --secure-listen-address=:8443
         - --upstream=http://127.0.0.1:8081/
         image: quay.io/coreos/kube-rbac-proxy:v0.4.0
+        imagePullPolicy: IfNotPresent
         name: kube-rbac-proxy-main
         ports:
         - containerPort: 8443
@@ -125,6 +126,7 @@ spec:
         - --secure-listen-address=:9443
         - --upstream=http://127.0.0.1:8082/
         image: quay.io/coreos/kube-rbac-proxy:v0.4.0
+        imagePullPolicy: IfNotPresent
         name: kube-rbac-proxy-self
         ports:
         - containerPort: 9443
@@ -142,6 +144,7 @@ spec:
         - --telemetry-host=127.0.0.1
         - --telemetry-port=8082
         image: quay.io/coreos/kube-state-metrics:v1.4.0
+        imagePullPolicy: IfNotPresent
         name: kube-state-metrics
         resources:
           limits:
@@ -171,6 +174,7 @@ spec:
               apiVersion: v1
               fieldPath: metadata.namespace
         image: quay.io/coreos/addon-resizer:1.0
+        imagePullPolicy: IfNotPresent
         name: addon-resizer
         resources:
           limits:

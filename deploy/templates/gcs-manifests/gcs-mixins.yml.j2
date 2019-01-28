@@ -9,6 +9,7 @@ spec:
       containers:
       - name: gluster-mixins
         image: quay.io/gluster/gluster-mixins:latest
+        imagePullPolicy: IfNotPresent
       restartPolicy: Never
       serviceAccountName: gluster-mixins
 ---

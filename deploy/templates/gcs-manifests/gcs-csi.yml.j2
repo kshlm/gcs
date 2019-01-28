@@ -67,6 +67,7 @@ spec:
       containers:
         - name: csi-attacher
           image: quay.io/k8scsi/csi-attacher:v1.0.1
+          imagePullPolicy: IfNotPresent
           args:
             - "--v=5"
             - "--csi-address=$(ADDRESS)"
@@ -87,6 +88,7 @@ spec:
 
         - name: glusterfs
           image: docker.io/gluster/gluster-csi-driver:latest
+          imagePullPolicy: IfNotPresent
           args:
             - "--nodeid=$(NODE_ID)"
             - "--v=5"
@@ -168,6 +170,7 @@ spec:
       containers:
         - name: csi-node-driver-registrar
           image: quay.io/k8scsi/csi-node-driver-registrar:v1.0.1
+          imagePullPolicy: IfNotPresent
           args:
             - "--v=5"
             - "--csi-address=$(ADDRESS)"
@@ -197,6 +200,7 @@ spec:
               add: ["SYS_ADMIN"]
             allowPrivilegeEscalation: true
           image: docker.io/gluster/gluster-csi-driver:latest
+          imagePullPolicy: IfNotPresent
           args:
             - "--nodeid=$(NODE_ID)"
             - "--v=5"
@@ -325,6 +329,7 @@ spec:
       containers:
         - name: csi-provisioner
           image: quay.io/k8scsi/csi-provisioner:v1.0.1
+          imagePullPolicy: IfNotPresent
           args:
             - "--provisioner=org.gluster.glusterfs"
             - "--csi-address=$(ADDRESS)"
@@ -337,6 +342,7 @@ spec:
               mountPath: /var/lib/csi/sockets/pluginproxy/
         - name: csi-snapshotter
           image: quay.io/k8scsi/csi-snapshotter:v1.0.1
+          imagePullPolicy: IfNotPresent
           args:
             - "--csi-address=$(ADDRESS)"
             - "--connection-timeout=15s"
@@ -344,11 +350,13 @@ spec:
             - name: ADDRESS
               value: /var/lib/csi/sockets/pluginproxy/csi.sock
           imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: socket-dir
               mountPath: /var/lib/csi/sockets/pluginproxy/
         - name: csi-cluster-driver-registrar
           image: quay.io/k8scsi/csi-cluster-driver-registrar:v1.0.1
+          imagePullPolicy: IfNotPresent
           args:
             - "--v=5"
             - "--pod-info-mount-version=\"v1\""
@@ -362,6 +370,7 @@ spec:
 
         - name: gluster-provisioner
           image: docker.io/gluster/gluster-csi-driver:latest
+          imagePullPolicy: IfNotPresent
           args:
             - "--nodeid=$(NODE_ID)"
             - "--v=5"

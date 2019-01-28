@@ -102,6 +102,7 @@ spec:
         - --config-reloader-image=quay.io/coreos/configmap-reload:v0.0.1
         - --prometheus-config-reloader=quay.io/coreos/prometheus-config-reloader:v0.25.0
         image: quay.io/coreos/prometheus-operator:v0.25.0
+        imagePullPolicy: IfNotPresent
         name: prometheus-operator
         ports:
         - containerPort: 8080
