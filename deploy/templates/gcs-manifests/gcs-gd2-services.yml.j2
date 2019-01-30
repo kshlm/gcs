@@ -10,6 +10,7 @@ metadata:
     app.kubernetes.io/component: glusterfs
     app.kubernetes.io/name: glusterd2-service
 spec:
+  publishNotReadyAddresses: true
   clusterIP: None
   selector:
     app.kubernetes.io/part-of: gcs
