@@ -27,6 +27,7 @@
             - gcs-namespace.yml
             - gcs-etcd-operator.yml
             - gcs-etcd-cluster.yml
+            - gcs-etcd-alternative.yml
             - gcs-gd2-services.yml
             - gcs-csi.yml
             - gcs-storage-snapshot.yml
@@ -124,7 +125,7 @@
         - name: GCS | ETCD Cluster | Deploy etcd-cluster
           kube:
             kubectl: "{{ kubectl }}"
-            file: "{{ manifests_dir }}/gcs-etcd-cluster.yml"
+            file: "{{ manifests_dir }}/gcs-etcd-alternative.yml"
           register: result
           until: not result.failed
           delay: 5
